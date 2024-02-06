@@ -23,5 +23,6 @@ which does both buying and selling in a single app.
 - As a user, I want to be able to buy products
 - As a user, I want to be able to view the list of products bought
 - As a user, I want to be able to add a product to my cart
+- As a user, I want to be able to remove a product from my cart
 - As a user, I want to be able to view a list of products in my cart
 - As a user, I want to be able to rate the products
