@@ -6,7 +6,7 @@ import java.util.*;
 public class Cart {
     private ArrayList<Product> listOfProduct;
 
-    Cart() {
+    public Cart() {
         listOfProduct = new ArrayList<>();
     }
 

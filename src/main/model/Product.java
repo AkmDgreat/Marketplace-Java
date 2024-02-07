@@ -5,9 +5,10 @@ import java.awt.*;
 // Represents a product having a product-ID, name, price, rating, and whether it's added to cart
 // this is the product that user "sees" in the marketPlace
 public class Product {
-    private int productName;
+    private String productName;
     private int productPrice;
     private int productRating;
+    private int numProductsSold;
     private boolean addedToCart;
     private int productId;
     private static int counter = 0;
@@ -15,7 +16,7 @@ public class Product {
 
     // REQUIRES:
     // EFFECTS:
-    Product(int productName, int productPrice) {
+    public Product(String productName, int productPrice) {
         this.productName = productName;
         this.productPrice = productPrice;
         this.productRating = 0;
@@ -30,7 +31,7 @@ public class Product {
 //    }
 
     // GETTERS:
-    public int getProductName() {
+    public String getProductName() {
         return this.productName;
     }
 
@@ -44,6 +45,14 @@ public class Product {
 
     public int getProductId() {
         return productId;
+    }
+
+    public int getNumProductsSold() {
+        return numProductsSold;
+    }
+
+    public void incrementNumProductSold() {
+        this.numProductsSold++;
     }
 
     // REQUIRES: 1 <= productRating <= 5

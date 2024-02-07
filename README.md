@@ -14,15 +14,20 @@ which does both buying and selling in a single app.
 
 ## User Stories
 **For sellers:**
-- As a user, I want to be able to list my products and specify the price and the shipping cost of the product
-- As a user, I want to be able to view the list of my products
-- As a user, I want to be able to select a product and view the reviews of the product
+- As a user, I want to be able to add my products to marketPlace and specify 
+the price (including the shipping cost) of the product
+- As a user, I want to be able to view the list of my products, along with their ratings, 
+and how many times they are bought
+- As a user, I want to be able to remove a listing
 
 **For buyers:**
 - As a user, I want to be able to view the list of all the products available
 - As a user, I want to be able to buy products
 - As a user, I want to be able to view the list of products bought
 - As a user, I want to be able to add a product to my cart
+
+
+
 - As a user, I want to be able to remove a product from my cart
 - As a user, I want to be able to view a list of products in my cart
 - As a user, I want to be able to rate the products

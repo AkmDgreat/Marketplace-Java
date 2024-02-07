@@ -13,6 +13,10 @@ public class MarketPlace {
         return this.listOfProductsAvailable;
     }
 
+    public void addProductToMP(Product product) {
+        listOfProductsAvailable.add(product);
+    }
+
 //    public boolean isEmpty() {
 //        return listOfProductsAvailable.size() == 0;
 //    }

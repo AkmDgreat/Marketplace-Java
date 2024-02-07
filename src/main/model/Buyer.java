@@ -11,6 +11,7 @@ public class Buyer {
 
     public void buyProduct(Product product) {
         orderList.add(product);
+        product.incrementNumProductSold();
     }
 
     public ArrayList<Product> getBoughtProducts() {
