@@ -4,12 +4,12 @@ import model.*;
 
 import java.util.*;
 
+// MarketPlace application
 public class MarketPlaceApp {
     private Scanner input;
     private MarketPlace marketPlace;
     private Buyer buyer;
     private Seller seller;
-    //private Cart cart;
 
     // EFFECTS: runs the marketplace application
     public MarketPlaceApp() {
@@ -17,6 +17,8 @@ public class MarketPlaceApp {
         runMarketPlace();
     }
 
+    // MODIFIES: this
+    // EFFECTS: initialises marketPlace
     private void init() {
         marketPlace = new MarketPlace();
 
@@ -70,12 +72,14 @@ public class MarketPlaceApp {
         }
     }
 
+    // EFFECTS: initialises buyer
     private void buyerUi() {
         buyer = new Buyer();
-        //cart = new Cart();
         runMarketPlaceBuyer();
     }
 
+    // MODIFIES: this
+    // EFFECTS: processes user input
     private void runMarketPlaceBuyer() {
         boolean keepGoing = true;
         String command = null;
@@ -96,6 +100,7 @@ public class MarketPlaceApp {
         System.out.println("\nGoing back to the main menu");
     }
 
+    // EFFECTS: displays options for buyers
     private void buyerScreen() {
         System.out.println("\nWhat would you like to do?");
         System.out.println("\tb -> buy a product");
@@ -104,6 +109,8 @@ public class MarketPlaceApp {
         System.out.println("\tq -> quit application");
     }
 
+    // MODIFIES: this
+    // EFFECTS: processes buyer command
     private void processBuyerCommand(String command) {
         if (command.equals("b")) {
             listAllProducts();
@@ -116,6 +123,7 @@ public class MarketPlaceApp {
         }
     }
 
+    // EFFECTS: displays previously bought products of the buyer
     private void viewPastOrders() {
         ArrayList<Product> ordersOfBuyer = buyer.getBoughtProducts();
         if (ordersOfBuyer.isEmpty()) {
@@ -126,6 +134,8 @@ public class MarketPlaceApp {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: buys the product
     private void chooseAndBuyProducts() {
         int chosenId = input.nextInt();
         ArrayList<Product> productList = marketPlace.getListOfProductsAvailable();
@@ -142,6 +152,8 @@ public class MarketPlaceApp {
         System.out.println("product with ID " + chosenId + " does not exist");
     }
 
+    // MODIFIES: this
+    // EFFECTS: rates the product
     private void rateProduct() {
         ArrayList<Product> ordersOfBuyer = buyer.getBoughtProducts();
         if (ordersOfBuyer.isEmpty()) {
@@ -153,6 +165,8 @@ public class MarketPlaceApp {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: adds the rating (a helper function for rateProduct)
     private void addRating(ArrayList<Product> ordersOfBuyer) {
         int chosenId = input.nextInt();
         for (int i = 0; i < ordersOfBuyer.size(); i++) {
@@ -166,6 +180,8 @@ public class MarketPlaceApp {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: lists the products, and buys the product
     private void listAllProducts() {
         ArrayList<Product> productList = marketPlace.getListOfProductsAvailable();
         if (productList.isEmpty()) {
@@ -177,6 +193,7 @@ public class MarketPlaceApp {
         }
     }
 
+    // EFFECTS: shows the products in the list (a helper function)
     private static void displayProducts(ArrayList<Product> list) {
         for (int i = 0; i < list.size(); i++) {
             Product product = list.get(i);
@@ -188,6 +205,7 @@ public class MarketPlaceApp {
         }
     }
 
+    // EFFECTS: shows the products in the list (a helper function)
     private static void displayProductsForSeller(HashSet<Product> list) {
         Product[] productsArray = list.toArray(new Product[list.size()]);
         for (int i = 0; i < list.size(); i++) {
@@ -201,6 +219,7 @@ public class MarketPlaceApp {
         }
     }
 
+    // EFFECTS: displays a product (a helper function)
     private static void displayProduct(Product product) {
         System.out.print("\tID: " + product.getProductId());
         System.out.print("\tPrice: " + product.getProductPrice());
@@ -209,14 +228,16 @@ public class MarketPlaceApp {
         System.out.println();
     }
 
-
-
     // SELLER:
+
+    // EFFECTS: initialises buyer
     private void sellerUi() {
         seller = new Seller();
         runMarketPlaceSeller();
     }
 
+    // MODIFIES: this
+    // EFFECTS: processes user input
     private void runMarketPlaceSeller() {
         boolean keepGoing = true;
         String command = null;
@@ -237,6 +258,7 @@ public class MarketPlaceApp {
         System.out.println("\nGoing back to the main menu");
     }
 
+    // EFFECTS: displays menu of options to the seller
     private void sellerScreen() {
         System.out.println("\nWhat would you like to do?");
         System.out.println("\ts -> sell a product");
@@ -244,6 +266,8 @@ public class MarketPlaceApp {
         System.out.println("\tq -> quit application");
     }
 
+    // MODIFIES: this
+    // EFFECTS: processes user command
     private void processSellerCommand(String command) {
         if (command.equals("s")) {
             sellProduct();
@@ -254,6 +278,8 @@ public class MarketPlaceApp {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: sells the product
     private void sellProduct() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Choose the product's name and price");
@@ -267,9 +293,9 @@ public class MarketPlaceApp {
 
         System.out.println("The following product was listed in the market place!");
         displayProduct(product);
-        //product.incrementNumProductSold();
     }
 
+    // EFFECTS: displays the products
     private void viewProductsListedBySeller() {
         if (seller.getProductsListedByTheSeller().size() == 0) {
             System.out.println("No products listed! Start selling today!");

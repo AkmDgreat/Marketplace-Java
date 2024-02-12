@@ -1,34 +1,43 @@
 package model;
 
-import java.awt.*;
-
-// Represents a product having a product-ID, name, price, rating, and whether it's added to cart
-// this is the product that user "sees" in the marketPlace
+// Represents a product having a product-ID, name, price, and rating
 public class Product {
     private String productName;
     private int productPrice;
     private int productRating;
     private int numProductsSold;
-    private boolean addedToCart;
     private int productId;
     private static int counter = 0;
-    // private Image productImage;
 
-    // REQUIRES:
-    // EFFECTS:
+
+    // EFFECTS: creates a product with given name, price, and 0 rating, and
+    //          0 number of buys
     public Product(String productName, int productPrice) {
         this.productName = productName;
         this.productPrice = productPrice;
         this.productRating = 0;
-        this.addedToCart = false;
+        incrementCounter();
         this.productId = counter;
+    }
+
+    // MODIFIES: this
+    // EFFECTS: increments the counter by 1
+    public void incrementCounter() {
         counter++;
     }
 
-//    Product(int productRating, boolean addedToCart) {
-//        this.productRating = -1;
-//        this.addedToCart = false;
-//    }
+    // MODIFIES: this
+    // EFFECTS: adds 1 to number of products sold
+    public void incrementNumProductSold() {
+        this.numProductsSold++;
+    }
+
+    // REQUIRES: 1 <= productRating <= 5
+    // MODIFIES: this
+    // EFFECTS: sets the product rating
+    public void setProductRating(int productRating) {
+        this.productRating = productRating;
+    }
 
     // GETTERS:
     public String getProductName() {
@@ -50,20 +59,4 @@ public class Product {
     public int getNumProductsSold() {
         return numProductsSold;
     }
-
-    public void incrementNumProductSold() {
-        this.numProductsSold++;
-    }
-
-    // REQUIRES: 1 <= productRating <= 5
-    public void setProductRating(int productRating) {
-        this.productRating = productRating;
-    }
-
-    // MODIFIES: this
-    // EFFECTS: adds the product to the cart
-    public void addToCart() {
-        this.addedToCart = true;
-    }
-
 }

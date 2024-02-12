@@ -2,30 +2,24 @@ package model;
 
 import java.util.ArrayList;
 
+// Represents the marketplace with the list of listed products
 public class MarketPlace {
     private ArrayList<Product> listOfProductsAvailable;
 
+    // creates a new marketplace with no products listed
     public MarketPlace() {
         listOfProductsAvailable = new ArrayList<>();
     }
 
-    public ArrayList<Product> getListOfProductsAvailable() {
-        return this.listOfProductsAvailable;
-    }
-
+    // MODIFIES: this
+    // EFFECTS: adds a product to the listOfProductsAvailable
     public void addProductToMP(Product product) {
         listOfProductsAvailable.add(product);
     }
 
-//    public boolean isEmpty() {
-//        return listOfProductsAvailable.size() == 0;
-//    }
+    // GETTERS:
+    public ArrayList<Product> getListOfProductsAvailable() {
+        return this.listOfProductsAvailable;
+    }
 
-//    public void buyProduct() {
-//
-//    }
-
-//    public void viewProduct() {
-//
-//    }
 }
