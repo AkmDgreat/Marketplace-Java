@@ -281,11 +281,15 @@ public class MarketPlaceApp {
         }
     }
 
+    private void noListingsMessage() {
+        System.out.println("No products listed yet! Start selling today!");
+    }
+
     // MODIFIES: this
     // EFFECTS: removes the product listing
     private void removeProductListing() {
         if (this.seller.getProductsListedByTheSeller().isEmpty()) {
-            this.seller.noListingsMessage();
+            noListingsMessage();
             return;
         }
         Scanner scanner = new Scanner(System.in);
@@ -328,7 +332,7 @@ public class MarketPlaceApp {
     // EFFECTS: displays the products
     private void viewProductsListedBySeller() {
         if (seller.getProductsListedByTheSeller().size() == 0) {
-            this.seller.noListingsMessage();
+            noListingsMessage();
         } else {
             System.out.println("These are the products that were listed: ");
             displayProductsForSeller(seller.getProductsListedByTheSeller());

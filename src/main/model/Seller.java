@@ -25,10 +25,6 @@ public class Seller {
         this.productsListedByTheSeller.add(product);
     }
 
-    public void noListingsMessage() {
-        System.out.println("No products listed yet! Start selling today!");
-    }
-
     // GETTERS:
     public HashSet<Product> getProductsListedByTheSeller() {
         return this.productsListedByTheSeller;

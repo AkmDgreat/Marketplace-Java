@@ -51,4 +51,6 @@ public class SellerTest {
         assertEquals(seller.removeProduct(200), null);
         assertEquals(seller.getNumProductsListedByTheSeller(), 1);
     }
+
+
 }
