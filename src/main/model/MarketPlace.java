@@ -17,6 +17,26 @@ public class MarketPlace {
         listOfProductsAvailable.add(product);
     }
 
+    // MODIFIES: this
+    // EFFECTS: removes a product from listOfProductsAvailable
+    public void removeProduct(int productId) {
+        for (Product product: this.listOfProductsAvailable) {
+            if (product.getProductId() == productId) {
+                listOfProductsAvailable.remove(product);
+                return;
+            }
+        }
+    }
+
+    public Product getProduct(int productId) {
+        for (Product product: this.listOfProductsAvailable) {
+            if (productId == product.getProductId()) {
+                return product;
+            }
+        }
+        return null;
+    }
+
     // GETTERS:
     public ArrayList<Product> getListOfProductsAvailable() {
         return this.listOfProductsAvailable;

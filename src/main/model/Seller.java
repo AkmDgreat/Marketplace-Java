@@ -11,8 +11,32 @@ public class Seller {
         productsListedByTheSeller = new HashSet<>();
     }
 
+    public Product removeProduct(int productId) {
+        for (Product product: this.productsListedByTheSeller) {
+            if (productId == product.getProductId()) {
+                this.productsListedByTheSeller.remove(product);
+                return product;
+            }
+        }
+        return null;
+    }
+
+    public void addProduct(Product product) {
+        this.productsListedByTheSeller.add(product);
+    }
+
+    public void noListingsMessage() {
+        System.out.println("No products listed yet! Start selling today!");
+    }
+
     // GETTERS:
     public HashSet<Product> getProductsListedByTheSeller() {
         return this.productsListedByTheSeller;
     }
+
+    public int getNumProductsListedByTheSeller() {
+        return this.productsListedByTheSeller.size();
+    }
+
+
 }

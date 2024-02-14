@@ -33,10 +33,34 @@ public class MarketPlaceTest {
     void testAddProductMultiple() {
         marketPlace.addProductToMP(macbook);
         assertEquals(marketPlace.getListOfProductsAvailable().size(), 1);
-        assertEquals(marketPlace.getListOfProductsAvailable().get(0), macbook);
+        assertEquals(marketPlace.getProduct(macbook.getProductId()), macbook);
 
         marketPlace.addProductToMP(iPhone);
         assertEquals(marketPlace.getListOfProductsAvailable().size(), 2);
-        assertEquals(marketPlace.getListOfProductsAvailable().get(1), iPhone);
+        assertEquals(marketPlace.getProduct(iPhone.getProductId()), iPhone);
+    }
+
+    @Test
+    void testGetProduct() {
+        marketPlace.addProductToMP(macbook);
+        marketPlace.addProductToMP(iPhone);
+
+        assertEquals(marketPlace.getProduct(macbook.getProductId()), macbook);
+        assertEquals(marketPlace.getProduct(iPhone.getProductId()), iPhone);
+        assertEquals(marketPlace.getProduct(10000), null);
+    }
+
+    @Test
+    void testRemoveProduct() {
+        int numProds = marketPlace.getListOfProductsAvailable().size();
+        marketPlace.addProductToMP(macbook);
+        marketPlace.addProductToMP(iPhone);
+        numProds += 2;
+
+        marketPlace.removeProduct(macbook.getProductId());
+        assertEquals(numProds-1 ,marketPlace.getListOfProductsAvailable().size());
+
+        marketPlace.removeProduct(iPhone.getProductId());
+        assertEquals(numProds-1-1 ,marketPlace.getListOfProductsAvailable().size());
     }
 }

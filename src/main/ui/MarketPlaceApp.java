@@ -263,6 +263,7 @@ public class MarketPlaceApp {
         System.out.println("\nWhat would you like to do?");
         System.out.println("\ts -> sell a product");
         System.out.println("\tv -> view my products and their rating and number of times they were sold");
+        System.out.println("\tr -> remove a listed product");
         System.out.println("\tq -> quit application");
     }
 
@@ -273,9 +274,37 @@ public class MarketPlaceApp {
             sellProduct();
         } else if (command.equals("v")) {
             viewProductsListedBySeller();
+        } else if (command.equals("r")) {
+            removeProductListing();
         } else {
             System.out.println("Selection not valid, please select again:");
         }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: removes the product listing
+    private void removeProductListing() {
+        if (this.seller.getProductsListedByTheSeller().isEmpty()) {
+            this.seller.noListingsMessage();
+            return;
+        }
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Choose the product id");
+        viewProductsListedBySeller();
+
+        int productId = scanner.nextInt();
+        Product product = marketPlace.getProduct(productId);
+        if (product == null) {
+            System.out.println("The product with id " + productId + "does not exist");
+            return;
+        }
+
+        marketPlace.removeProduct(productId);
+        //seller.getProductsListedByTheSeller().remove(product);
+        seller.removeProduct(productId);
+
+        System.out.println("The following product was removed from the market place:");
+        displayProduct(product);
     }
 
     // MODIFIES: this
@@ -289,7 +318,8 @@ public class MarketPlaceApp {
 
         Product product = new Product(productName, productPrice);
         marketPlace.addProductToMP(product);
-        seller.getProductsListedByTheSeller().add(product);
+        //seller.getProductsListedByTheSeller().add(product);
+        seller.addProduct(product);
 
         System.out.println("The following product was listed in the market place!");
         displayProduct(product);
@@ -298,7 +328,7 @@ public class MarketPlaceApp {
     // EFFECTS: displays the products
     private void viewProductsListedBySeller() {
         if (seller.getProductsListedByTheSeller().size() == 0) {
-            System.out.println("No products listed! Start selling today!");
+            this.seller.noListingsMessage();
         } else {
             System.out.println("These are the products that were listed: ");
             displayProductsForSeller(seller.getProductsListedByTheSeller());

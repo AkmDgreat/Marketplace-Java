@@ -15,7 +15,7 @@ which does both buying and selling in a single app.
 ## User Stories
 **For sellers:**
 - As a user, I want to be able to add my products to marketPlace and specify 
-the price (including the shipping cost) of the product
+the price of the product
 - As a user, I want to be able to view the list of my products, along with their ratings, 
 and how many times they are bought
 - As a user, I want to be able to remove a listing
@@ -26,4 +26,4 @@ and how many times they are bought
 - As a user, I want to be able to view the list of products bought
 - As a user, I want to be able to rate the products
 
-- REMOVE FUNCTIONALITY
+- MODIFY MODIFIES: (it should be non-this for some classes)!!!
