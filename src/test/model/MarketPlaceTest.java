@@ -63,4 +63,18 @@ public class MarketPlaceTest {
         marketPlace.removeProduct(iPhone.getProductId());
         assertEquals(numProds-1-1 ,marketPlace.getListOfProductsAvailable().size());
     }
+
+    @Test
+    void testRemoveProductNothingHappens() {
+        int numProds = marketPlace.getListOfProductsAvailable().size();
+        marketPlace.addProductToMP(macbook);
+        marketPlace.addProductToMP(iPhone);
+        numProds += 2;
+
+        marketPlace.removeProduct(2000);
+        assertEquals(numProds ,marketPlace.getListOfProductsAvailable().size());
+
+        marketPlace.removeProduct(5000);
+        assertEquals(numProds ,marketPlace.getListOfProductsAvailable().size());
+    }
 }
