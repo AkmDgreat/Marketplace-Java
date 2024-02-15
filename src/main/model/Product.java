@@ -10,8 +10,8 @@ public class Product {
     private static int counter = 0;
 
 
-    // EFFECTS: creates a product with given name, price, and 0 rating, and
-    //          0 number of buys
+    // EFFECTS: creates a product with given name, price, 0 rating,
+    // unique product ID and 0 number of buys
     public Product(String productName, int productPrice) {
         this.productName = productName;
         this.productPrice = productPrice;

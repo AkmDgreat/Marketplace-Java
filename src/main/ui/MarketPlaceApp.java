@@ -228,7 +228,7 @@ public class MarketPlaceApp {
         System.out.println();
     }
 
-    // SELLER:
+    // SELLER METHODS:
 
     // EFFECTS: initialises buyer
     private void sellerUi() {
@@ -281,6 +281,7 @@ public class MarketPlaceApp {
         }
     }
 
+    // EFFECTS: displays a message
     private void noListingsMessage() {
         System.out.println("No products listed yet! Start selling today!");
     }
@@ -304,7 +305,6 @@ public class MarketPlaceApp {
         }
 
         marketPlace.removeProduct(productId);
-        //seller.getProductsListedByTheSeller().remove(product);
         seller.removeProduct(productId);
 
         System.out.println("The following product was removed from the market place:");
@@ -322,7 +322,6 @@ public class MarketPlaceApp {
 
         Product product = new Product(productName, productPrice);
         marketPlace.addProductToMP(product);
-        //seller.getProductsListedByTheSeller().add(product);
         seller.addProduct(product);
 
         System.out.println("The following product was listed in the market place!");

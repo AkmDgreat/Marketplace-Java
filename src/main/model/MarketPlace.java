@@ -28,6 +28,7 @@ public class MarketPlace {
         }
     }
 
+    // EFFECTS: returns the product in the marketplace, and null if not found
     public Product getProduct(int productId) {
         for (Product product: this.listOfProductsAvailable) {
             if (productId == product.getProductId()) {

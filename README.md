@@ -25,5 +25,3 @@ and how many times they are bought
 - As a user, I want to be able to buy products
 - As a user, I want to be able to view the list of products bought
 - As a user, I want to be able to rate the products
-
-- MODIFY MODIFIES: (it should be non-this for some classes)!!!

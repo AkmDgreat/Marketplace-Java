@@ -11,6 +11,9 @@ public class Seller {
         productsListedByTheSeller = new HashSet<>();
     }
 
+    // MODIFIES: this
+    // EFFECTS: removes the product from the seller list and returns it
+    //          the function returns the product instead of void to increase testability
     public Product removeProduct(int productId) {
         for (Product product: this.productsListedByTheSeller) {
             if (productId == product.getProductId()) {
@@ -21,6 +24,8 @@ public class Seller {
         return null;
     }
 
+    // MODIFIES: this
+    // EFFECTS: adds the product to the seller list
     public void addProduct(Product product) {
         this.productsListedByTheSeller.add(product);
     }
@@ -33,6 +38,5 @@ public class Seller {
     public int getNumProductsListedByTheSeller() {
         return this.productsListedByTheSeller.size();
     }
-
 
 }
