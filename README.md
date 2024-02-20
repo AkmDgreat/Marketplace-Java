@@ -19,9 +19,15 @@ the price of the product
 - As a user, I want to be able to view the list of my products, along with their ratings, 
 and how many times they are bought
 - As a user, I want to be able to remove a listing
+- As a user, when I select the quit option from the seller menu, 
+  I want to be reminded to save my products, and have the option to do so or not.
+- As a user, when I log in, I want to be given the option to load my listed items from file.
 
 **For buyers:**
 - As a user, I want to be able to view the list of all the products available
 - As a user, I want to be able to buy products
 - As a user, I want to be able to view the list of products bought
 - As a user, I want to be able to rate the products
+- As a user, when I select the quit option from the buyer menu,
+  I want to be reminded to save the products I bought, and have the option to do so or not
+- As a user, when I log in, I want to be given the option to load my orders from file.
