@@ -1,7 +1,10 @@
 package model;
 
+import org.json.JSONObject;
+import persistence.Writable;
+
 // Represents a product having a product-ID, name, price, and rating
-public class Product {
+public class Product implements Writable {
     private String productName;
     private int productPrice;
     private int productRating;
@@ -37,6 +40,14 @@ public class Product {
     // EFFECTS: sets the product rating
     public void setProductRating(int productRating) {
         this.productRating = productRating;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", this.productName);
+        json.put("price", this.productPrice);
+        return json;
     }
 
     // GETTERS:

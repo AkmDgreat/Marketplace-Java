@@ -1,7 +1,11 @@
 package ui;
 
 import model.*;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.*;
 
 // MarketPlace application
@@ -10,6 +14,10 @@ public class MarketPlaceApp {
     private MarketPlace marketPlace;
     private Buyer buyer;
     private Seller seller;
+
+    private static final String JSON_STORE = "./data/marketPlace.json";
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
 
     // EFFECTS: runs the marketplace application
     public MarketPlaceApp() {
@@ -21,13 +29,17 @@ public class MarketPlaceApp {
     // EFFECTS: initialises marketPlace
     private void init() {
         marketPlace = new MarketPlace();
+        //marketPlace = new MarketPlace("Alex's workroom");
 
-        marketPlace.addProductToMP(new Product("iPhone10", 600));
-        marketPlace.addProductToMP(new Product("MacBook M2", 1800));
-        marketPlace.addProductToMP(new Product("shitty Windows laptop", 100));
+//        marketPlace.addProductToMP(new Product("iPhone10", 600));
+//        marketPlace.addProductToMP(new Product("MacBook M2", 1800));
+//        marketPlace.addProductToMP(new Product("shitty Windows laptop", 100));
 
         input = new Scanner(System.in);
         input.useDelimiter("\n");
+
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
     }
 
     // MODIFIES: this
@@ -57,6 +69,8 @@ public class MarketPlaceApp {
         System.out.println("\nDo you want to buy or sell?");
         System.out.println("\tb -> buy");
         System.out.println("\ts -> sell");
+        System.out.println("\tsave -> save marketplace to file");
+        System.out.println("\tload -> load marketplace from file");
         System.out.println("\tq -> quit application");
     }
 
@@ -67,8 +81,37 @@ public class MarketPlaceApp {
             buyerUi();
         } else if (command.equals("s")) {
             sellerUi();
+        } else if (command.equals("save")) {
+            saveMarketPlace();
+        } else if (command.equals("load")) {
+            loadMarketPlace();
         } else {
             System.out.println("Selection not valid, please select again:");
+        }
+    }
+
+    // EFFECTS: saves the marketPlace to file
+    private void saveMarketPlace() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(marketPlace);
+            jsonWriter.close();
+            //System.out.println("Saved " + marketPlace.getName() + " to " + JSON_STORE);
+            System.out.println("Saved marketPlace to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads workroom from file
+    private void loadMarketPlace() {
+        try {
+            marketPlace = jsonReader.read();
+            // System.out.println("Loaded " + marketPlace.getName() + " from " + JSON_STORE);
+            System.out.println("Loaded marketPlace from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
         }
     }
 
@@ -106,7 +149,7 @@ public class MarketPlaceApp {
         System.out.println("\tb -> buy a product");
         System.out.println("\tr -> rate a previously bought product");
         System.out.println("\tv -> view past orders");
-        System.out.println("\tq -> quit application");
+        System.out.println("\tq -> quit seller screen");
     }
 
     // MODIFIES: this
@@ -264,7 +307,7 @@ public class MarketPlaceApp {
         System.out.println("\ts -> sell a product");
         System.out.println("\tv -> view my products and their rating and number of times they were sold");
         System.out.println("\tr -> remove a listed product");
-        System.out.println("\tq -> quit application");
+        System.out.println("\tq -> quit seller screen");
     }
 
     // MODIFIES: this

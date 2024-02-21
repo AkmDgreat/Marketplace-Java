@@ -1,0 +1,10 @@
+{"products": [
+    {
+        "price": 700,
+        "name": "Fridge"
+    },
+    {
+        "price": 900,
+        "name": "Table"
+    }
+]}

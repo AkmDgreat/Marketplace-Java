@@ -12,6 +12,10 @@ I chose this project because most e-commerce applications have different apps fo
 example, has an *Amazon shopping* app and *Amazon Seller Central* for buying and selling). I want to create an app 
 which does both buying and selling in a single app.
 
+## Citations
+- *MarketPlaceApp* was inspired by *TellerApp* (https://github.students.cs.ubc.ca/CPSC210/TellerApp)
+   and *JsonSerializationDemo*(https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo)
+
 ## User Stories
 **For sellers:**
 - As a user, I want to be able to add my products to marketPlace and specify 
@@ -19,15 +23,15 @@ the price of the product
 - As a user, I want to be able to view the list of my products, along with their ratings, 
 and how many times they are bought
 - As a user, I want to be able to remove a listing
-- As a user, when I select the quit option from the seller menu, 
-  I want to be reminded to save my products, and have the option to do so or not.
-- As a user, when I log in, I want to be given the option to load my listed items from file.
 
 **For buyers:**
 - As a user, I want to be able to view the list of all the products available
 - As a user, I want to be able to buy products
 - As a user, I want to be able to view the list of products bought
 - As a user, I want to be able to rate the products
-- As a user, when I select the quit option from the buyer menu,
-  I want to be reminded to save the products I bought, and have the option to do so or not
-- As a user, when I log in, I want to be given the option to load my orders from file.
+
+**For both buyers and sellers:**
+- As a user, I want to be able to save the marketplace to file (if I so choose)
+- As a user, I want to be able to load the marketplace from file (If I so choose)
+
+- When the product is removed by the buyer, it should be removed from the JSON as well
