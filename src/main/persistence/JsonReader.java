@@ -19,7 +19,7 @@ public class JsonReader {
         this.source = source;
     }
 
-    // EFFECTS: reads workroom from file and returns it;
+    // EFFECTS: reads marketplace from file and returns it;
     // throws IOException if an error occurs reading data from file
     public MarketPlace read() throws IOException {
         String jsonData = readFile(source);

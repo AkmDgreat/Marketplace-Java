@@ -104,7 +104,7 @@ public class MarketPlaceApp {
     }
 
     // MODIFIES: this
-    // EFFECTS: loads workroom from file
+    // EFFECTS: loads marketplace from file
     private void loadMarketPlace() {
         try {
             marketPlace = jsonReader.read();
