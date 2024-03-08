@@ -31,6 +31,7 @@ and how many times they are bought
 - As a user, I want to be able to rate the products
 
 **For both buyers and sellers:**
-- As a user, I want to be able to save the marketplace to file (if I so choose)
+- As a user, I want to be able to save all the information (name, price, rating, buys) to 
+ the marketplace to file (if I so choose)
 - As a user, I want to be able to load the marketplace from file (If I so choose)
 

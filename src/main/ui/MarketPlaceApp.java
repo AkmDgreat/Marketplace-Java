@@ -29,11 +29,8 @@ public class MarketPlaceApp {
     // EFFECTS: initialises marketPlace
     private void init() {
         marketPlace = new MarketPlace();
-        //marketPlace = new MarketPlace("Alex's workroom");
-
-//        marketPlace.addProductToMP(new Product("iPhone10", 600));
-//        marketPlace.addProductToMP(new Product("MacBook M2", 1800));
-//        marketPlace.addProductToMP(new Product("shitty Windows laptop", 100));
+        buyer = new Buyer();
+        seller = new Seller();
 
         input = new Scanner(System.in);
         input.useDelimiter("\n");
@@ -54,7 +51,7 @@ public class MarketPlaceApp {
             command = input.next();
             command = command.toLowerCase();
 
-            if (command.equals("q")) {
+            if (command.equals("quit")) {
                 keepGoing = false;
             } else {
                 processCommand(command);
@@ -67,19 +64,19 @@ public class MarketPlaceApp {
     // EFFECTS: displays menu of options to user
     private void welcomeScreen() {
         System.out.println("\nDo you want to buy or sell?");
-        System.out.println("\tb -> buy");
-        System.out.println("\ts -> sell");
+        System.out.println("\tbuy -> buy");
+        System.out.println("\tsell -> sell");
         System.out.println("\tsave -> save marketplace to file");
         System.out.println("\tload -> load marketplace from file");
-        System.out.println("\tq -> quit application");
+        System.out.println("\tquit -> quit application");
     }
 
     // MODIFIES: this
     // EFFECTS: processes user command
     private void processCommand(String command) {
-        if (command.equals("b")) {
+        if (command.equals("buy")) {
             buyerUi();
-        } else if (command.equals("s")) {
+        } else if (command.equals("sell")) {
             sellerUi();
         } else if (command.equals("save")) {
             saveMarketPlace();
@@ -94,7 +91,7 @@ public class MarketPlaceApp {
     private void saveMarketPlace() {
         try {
             jsonWriter.open();
-            jsonWriter.write(marketPlace);
+            jsonWriter.write(marketPlace, seller, buyer);
             jsonWriter.close();
             //System.out.println("Saved " + marketPlace.getName() + " to " + JSON_STORE);
             System.out.println("Saved marketPlace to " + JSON_STORE);
@@ -107,8 +104,10 @@ public class MarketPlaceApp {
     // EFFECTS: loads marketplace from file
     private void loadMarketPlace() {
         try {
-            marketPlace = jsonReader.read();
-            // System.out.println("Loaded " + marketPlace.getName() + " from " + JSON_STORE);
+            this.marketPlace = jsonReader.readMp2();
+            this.seller = jsonReader.readSeller2();
+            this.buyer = jsonReader.readBuyer2();
+
             System.out.println("Loaded marketPlace from " + JSON_STORE);
         } catch (IOException e) {
             System.out.println("Unable to read from file: " + JSON_STORE);
@@ -117,7 +116,6 @@ public class MarketPlaceApp {
 
     // EFFECTS: initialises buyer
     private void buyerUi() {
-        buyer = new Buyer();
         runMarketPlaceBuyer();
     }
 
@@ -133,7 +131,7 @@ public class MarketPlaceApp {
             command = input.next();
             command = command.toLowerCase();
 
-            if (command.equals("q")) {
+            if (command.equals("quit")) {
                 keepGoing = false;
             } else {
                 processBuyerCommand(command);
@@ -146,20 +144,20 @@ public class MarketPlaceApp {
     // EFFECTS: displays options for buyers
     private void buyerScreen() {
         System.out.println("\nWhat would you like to do?");
-        System.out.println("\tb -> buy a product");
-        System.out.println("\tr -> rate a previously bought product");
-        System.out.println("\tv -> view past orders");
-        System.out.println("\tq -> quit seller screen");
+        System.out.println("\tbuy -> buy a product");
+        System.out.println("\trate -> rate a previously bought product");
+        System.out.println("\tview -> view past orders");
+        System.out.println("\tquit -> quit buyer screen");
     }
 
     // MODIFIES: this
     // EFFECTS: processes buyer command
     private void processBuyerCommand(String command) {
-        if (command.equals("b")) {
+        if (command.equals("buy")) {
             listAllProducts();
-        } else if (command.equals("r")) {
+        } else if (command.equals("rate")) {
             rateProduct();
-        } else if (command.equals("v")) {
+        } else if (command.equals("view")) {
             viewPastOrders();
         } else {
             System.out.println("Selection not valid, please select again:");
@@ -275,7 +273,6 @@ public class MarketPlaceApp {
 
     // EFFECTS: initialises buyer
     private void sellerUi() {
-        seller = new Seller();
         runMarketPlaceSeller();
     }
 
@@ -291,7 +288,7 @@ public class MarketPlaceApp {
             command = input.next();
             command = command.toLowerCase();
 
-            if (command.equals("q")) {
+            if (command.equals("quit")) {
                 keepGoing = false;
             } else {
                 processSellerCommand(command);
@@ -304,20 +301,20 @@ public class MarketPlaceApp {
     // EFFECTS: displays menu of options to the seller
     private void sellerScreen() {
         System.out.println("\nWhat would you like to do?");
-        System.out.println("\ts -> sell a product");
-        System.out.println("\tv -> view my products and their rating and number of times they were sold");
-        System.out.println("\tr -> remove a listed product");
-        System.out.println("\tq -> quit seller screen");
+        System.out.println("\tsell -> sell a product");
+        System.out.println("\tview -> view my products and their rating and number of times they were sold");
+        System.out.println("\tremove -> remove a listed product");
+        System.out.println("\tquit -> quit seller screen");
     }
 
     // MODIFIES: this
     // EFFECTS: processes user command
     private void processSellerCommand(String command) {
-        if (command.equals("s")) {
+        if (command.equals("sell")) {
             sellProduct();
-        } else if (command.equals("v")) {
+        } else if (command.equals("view")) {
             viewProductsListedBySeller();
-        } else if (command.equals("r")) {
+        } else if (command.equals("remove")) {
             removeProductListing();
         } else {
             System.out.println("Selection not valid, please select again:");
@@ -365,7 +362,7 @@ public class MarketPlaceApp {
 
         Product product = new Product(productName, productPrice);
         marketPlace.addProductToMP(product);
-        seller.addProduct(product);
+        seller.addProductToSellerList(product);
 
         System.out.println("The following product was listed in the market place!");
         displayProduct(product);

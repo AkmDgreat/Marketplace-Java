@@ -47,7 +47,6 @@ public class MarketPlace implements Writable {
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
-        //json.put("name", name);
         json.put("products", productsToJson());
         return json;
     }

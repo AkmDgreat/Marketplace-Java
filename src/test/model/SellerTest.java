@@ -24,7 +24,7 @@ public class SellerTest {
 
     @Test
     void removeProductTest() {
-        seller.addProduct(macBook);
+        seller.addProductToSellerList(macBook);
         assertEquals(seller.getNumProductsListedByTheSeller(), 1);
         assertEquals(seller.removeProduct(macBook.getProductId()), macBook);
         assertEquals(seller.getNumProductsListedByTheSeller(), 0);
@@ -32,8 +32,8 @@ public class SellerTest {
 
     @Test
     void removeProductTestMultiple() {
-        seller.addProduct(macBook);
-        seller.addProduct(fridge);
+        seller.addProductToSellerList(macBook);
+        seller.addProductToSellerList(fridge);
         assertEquals(seller.getNumProductsListedByTheSeller(), 2);
 
         assertEquals(seller.removeProduct(macBook.getProductId()), macBook);
@@ -46,7 +46,7 @@ public class SellerTest {
     @Test
     void removeProductTestNull() {
         // no product is removed, because the product id is incorrect
-        seller.addProduct(macBook);
+        seller.addProductToSellerList(macBook);
         assertEquals(seller.getNumProductsListedByTheSeller(), 1);
         assertEquals(seller.removeProduct(200), null);
         assertEquals(seller.getNumProductsListedByTheSeller(), 1);

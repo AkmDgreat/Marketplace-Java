@@ -1,9 +1,13 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.*;
 
 // Represents a seller with the list of products listed in the marketplace
-public class Seller {
+public class Seller implements Writable {
     private HashSet<Product> productsListedByTheSeller;
     // private String sellerName;
 
@@ -27,8 +31,26 @@ public class Seller {
 
     // MODIFIES: this
     // EFFECTS: adds the product to the seller list
-    public void addProduct(Product product) {
+    public void addProductToSellerList(Product product) {
         this.productsListedByTheSeller.add(product);
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("seller", sellerToJson());
+        return json;
+    }
+
+    // EFFECTS: returns seller in this marketPlace as a JSON array
+    private JSONArray sellerToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Product product : this.productsListedByTheSeller) {
+            jsonArray.put(product.toJson());
+        }
+
+        return jsonArray;
     }
 
     // GETTERS:

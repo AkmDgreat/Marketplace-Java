@@ -1,12 +1,1 @@
-{
-  "products": [
-    {
-        "price": 700,
-        "name": "macbook"
-    },
-    {
-        "price": 888,
-        "name": "lskajfl"
-    }
-]
-}
+{"byProducts":[{"price":100,"name":"mac","rating":3,"id":1},{"price":100,"name":"mac","rating":3,"id":1}],"mpProducts":[{"price":100,"name":"mac","rating":3,"id":1},{"price":900,"name":"book","rating":0,"id":2}],"slProducts":[{"buys":0,"price":900,"name":"book","rating":0,"id":2},{"buys":2,"price":100,"name":"mac","rating":3,"id":1}]}

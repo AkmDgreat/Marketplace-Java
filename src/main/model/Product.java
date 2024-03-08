@@ -47,6 +47,8 @@ public class Product implements Writable {
         JSONObject json = new JSONObject();
         json.put("name", this.productName);
         json.put("price", this.productPrice);
+        json.put("rating", this.productRating);
+        json.put("rating", this.numProductsSold);
         return json;
     }
 
@@ -69,5 +71,14 @@ public class Product implements Writable {
 
     public int getNumProductsSold() {
         return numProductsSold;
+    }
+
+    // the following two functions are for data persistence
+    public void setNumProductsSold(int numProductsSold) {
+        this.numProductsSold = numProductsSold;
+    }
+
+    public void setId(int productId) {
+        this.productId = productId;
     }
 }

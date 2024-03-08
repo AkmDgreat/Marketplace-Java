@@ -9,4 +9,8 @@ public class JsonTest {
         assertEquals(name, product.getProductName());
         assertEquals(price, product.getProductPrice());
     }
+
+    protected void checkProductHashSet(String name, int price, Product product) {
+
+    }
 }

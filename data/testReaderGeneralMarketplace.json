@@ -1,12 +1,13 @@
 {
-  "products": [
-    {
-      "price": 1800,
-      "name": "Macbook"
-    },
-    {
-      "price": 800,
-      "name": "iPhone"
-    }
+  "byProducts": [
+    {"price":50,"name":"bottle","rating":0},
+    {"price":500,"name":"paper","rating":0}],
+  "mpProducts":[
+    {"price":700,"name":"Fridge","rating":0},
+    {"price":900,"name":"Table","rating":0}
+  ],
+  "slProducts":[
+    {"price":100,"name":"book","rating":0, "buys": 0},
+    {"price":800,"name":"mac","rating":0, "buys":  0}
   ]
 }
