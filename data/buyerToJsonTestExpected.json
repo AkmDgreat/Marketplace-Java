@@ -1,0 +1,5 @@
+{
+  "byProducts": [
+    {"price":50,"name":"bottle","rating":0},
+    {"price":500,"name":"paper","rating":0}]
+}

@@ -59,4 +59,10 @@ public class ProductTest {
         macbook.setProductRating(5);
         assertEquals(macbook.getProductRating(), 5);
     }
+
+    @Test
+    void testSetProductId() {
+        macbook.setId(20);
+        assertEquals(macbook.getProductId(), 20);
+    }
 }

@@ -1,5 +1,6 @@
 package model;
 
+import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -40,4 +41,6 @@ class BuyerTest {
         assertEquals(buyer.getBoughtProducts().size(), 2);
         assertEquals(buyer.getBoughtProducts().get(1), macBook);
     }
+
+
 }

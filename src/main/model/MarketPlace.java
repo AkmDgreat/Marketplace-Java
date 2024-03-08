@@ -67,7 +67,4 @@ public class MarketPlace implements Writable {
         return this.listOfProductsAvailable;
     }
 
-//    public String getName() {
-//        return this.name;
-//    }
 }
