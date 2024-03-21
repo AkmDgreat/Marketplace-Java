@@ -9,12 +9,10 @@ import java.util.ArrayList;
 // Represents the marketplace with the list of listed products
 public class MarketPlace implements Writable {
     private ArrayList<Product> listOfProductsAvailable;
-    // private String name;
 
     // creates a new marketplace with no products listed
     public MarketPlace() {
         listOfProductsAvailable = new ArrayList<>();
-        //name = "Akshat's marketplace";
     }
 
     // MODIFIES: this
