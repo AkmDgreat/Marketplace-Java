@@ -68,6 +68,7 @@ public class MarketPlaceGUI extends JFrame {
         this.setLayout(new BorderLayout());
     }
 
+    @SuppressWarnings("methodlength")
     private void setLayout() {
         southPanel = new JPanel(new FlowLayout());
         //centerPanel = new JPanel(new GridBagLayout());
@@ -191,6 +192,7 @@ public class MarketPlaceGUI extends JFrame {
         });
     }
 
+    @SuppressWarnings("methodlength")
     private void rateOrder() {
         this.centerPanel.removeAll();
         this.centerPanel.repaint();
@@ -262,7 +264,7 @@ public class MarketPlaceGUI extends JFrame {
         this.centerPanel.validate();
     }
 
-
+    @SuppressWarnings("methodlength")
     private void buyProduct() {
         viewListedProducts();
 
@@ -295,6 +297,7 @@ public class MarketPlaceGUI extends JFrame {
         });
     }
 
+    @SuppressWarnings("methodlength")
     private void removeAListedProduct() {
         this.centerPanel.removeAll();
         this.centerPanel.repaint();
@@ -389,6 +392,7 @@ public class MarketPlaceGUI extends JFrame {
         this.centerPanel.validate();
     }
 
+    @SuppressWarnings("methodlength")
     private void sellProduct() {
         this.centerPanel.removeAll();
         this.centerPanel.repaint();
