@@ -17,13 +17,15 @@ which does both buying and selling in a single app.
    and *JsonSerializationDemo*(https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo)
 - The GUI was inspired by 
   https://stackoverflow.com/questions/21375255/jpanel-positions-and-sizes-changes-according-to-screensize/21376596#21376596
+- The splash screen was inspired by
+  https://stackoverflow.com/questions/16134549/how-to-make-a-splash-screen-for-gui
 
 ## User Stories
 **For sellers:**
 - As a user, I want to be able to add my products to marketPlace and specify 
 the price of the product
 - As a user, I want to be able to view the list of my products, along with their ratings,
-  and their price
+their price, and number of buys
 - As a user, I want to be able to remove a listing
 
 **For buyers:**
@@ -36,4 +38,14 @@ the price of the product
 - As a user, I want to be able to save all the information (name, price, rating) to 
  the marketplace to file (if I so choose)
 - As a user, I want to be able to load the marketplace from file (If I so choose)
+
+## Instructions for Grader
+
+- You can add product to the marketplace by clicking the button labelled `List a product`
+- You can remove a product by clicking the button labelled `remove a listing`
+- You can buy a product by clicking the button labelled `Buy`
+- You can view your previous orders by clicking the button labelled `Previous orders`
+- You can locate my visual component when you start up the application for the first time
+- You can save the state of my application by clicking the `save` button at the bottom
+- You can reload the state of my application by pressing the `load` button at the button
 
