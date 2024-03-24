@@ -6,7 +6,9 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.stream.Stream;
+import java.util.*;
 
 import org.json.*;
 
@@ -30,6 +32,7 @@ public class JsonReader {
         return contentBuilder.toString();
     }
 
+    // EFFECTS: reads Buyer from the file and returns it
     public Buyer readBuyer2() throws IOException {
         String jsonData = readFile(source);
         JSONObject jsonObject = new JSONObject(jsonData);
@@ -42,17 +45,18 @@ public class JsonReader {
             String name = nextProduct.getString("name");
             int price = nextProduct.getInt("price");
             int rating = nextProduct.getInt("rating");
-            //int id = nextProduct.getInt("id");
+            int id = nextProduct.getInt("id");
 
             Product product = new Product(name, price);
             product.setProductRating(rating);
-            //product.setId(id);
+            product.setId(id);
             by.buyProduct(product);
         }
 
         return by;
     }
 
+    // EFFECTS: reads MarketPlace from file and returns it
     public MarketPlace readMp2() throws IOException {
         String jsonData = readFile(source);
         JSONObject jsonObject = new JSONObject(jsonData);
@@ -65,11 +69,11 @@ public class JsonReader {
             String name = nextProduct.getString("name");
             int price = nextProduct.getInt("price");
             int rating = nextProduct.getInt("rating");
-            //int id = nextProduct.getInt("id");
+            int id = nextProduct.getInt("id");
 
             Product product = new Product(name, price);
             product.setProductRating(rating);
-            //product.setId(id);
+            product.setId(id);
 
             mp.addProductToMP(product);
         }
@@ -77,6 +81,38 @@ public class JsonReader {
         return mp;
     }
 
+    // EFFECTS: finds the highest product ID from JSON, and sets the product.COUNTER to that value
+//    private int maxProductId() throws IOException {
+//        String jsonData = readFile(source);
+//        JSONObject jsonObject = new JSONObject(jsonData);
+//        JSONArray buyerProducts = jsonObject.getJSONArray("mpProducts");
+//        List<Integer> idList = new ArrayList<>();
+//
+//        for (Object json: buyerProducts) {
+//            JSONObject nextProduct = (JSONObject) json;
+//            int id = nextProduct.getInt("id");
+//            idList.add(id);
+//        }
+//
+//        return maxIntFromArr(idList);
+//    }
+
+    // EFFECTS: returns the maximum integer from the List
+//    private int maxIntFromArr(List<Integer> idList) {
+//        int minId = Integer.MIN_VALUE;
+//        for (int i = 0; i < idList.size(); i++) {
+//            minId = Math.min(minId, idList.get(i));
+//        }
+//        return minId;
+//    }
+
+    // EFFECTS: creates a new product and sets it to the max product id
+//    public void setProductId() throws IOException {
+//        Product product = new Product("temporary product", 100);
+//        //product.setCounter(maxProductId());
+//    }
+
+    // EFFECTS: reads Seller from the file and returns it
     public Seller readSeller2() throws IOException {
         String jsonData = readFile(source);
         JSONObject jsonObject = new JSONObject(jsonData);
@@ -90,12 +126,12 @@ public class JsonReader {
             int price = nextProduct.getInt("price");
             int rating = nextProduct.getInt("rating");
             int buys = nextProduct.getInt("buys");
-            //int id = nextProduct.getInt("id");
+            int id = nextProduct.getInt("id");
 
             Product product = new Product(name, price);
             product.setProductRating(rating);
             product.setNumProductsSold(buys);
-            //product.setId(id);
+            product.setId(id);
 
             sl.addProductToSellerList(product);
         }

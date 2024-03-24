@@ -1,9 +1,12 @@
 package ui;
 
-// https://stackoverflow.com/questions/21375255/jpanel-positions-and-sizes-changes-according-to-screensize/21376596#21376596
+
+import java.net.MalformedURLException;
+
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws MalformedURLException {
         //new MarketPlaceApp();
+        new SplashScreenGUI();
         new MarketPlaceGUI();
     }
 }

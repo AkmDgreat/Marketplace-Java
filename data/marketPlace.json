@@ -1,5 +1,1 @@
-{"byProducts":[{"price":800,"name":"mac","rating":5},
-  {"price":78,"name":"book","rating":0}],
-  "mpProducts":[{"price":800,"name":"mac","rating":5},{"price":78,"name":"book","rating":0}],
-  "slProducts":[{"buys":1,"price":78,"name":"book","rating":0,"id":2},
-    {"buys":1,"price":800,"name":"mac","rating":5,"id":1}]}
+{"byProducts":[{"price":1000,"name":"mac","rating":4,"id":90241}],"mpProducts":[{"price":1000,"name":"mac","rating":4,"id":90241}],"slProducts":[{"buys":1,"price":1000,"name":"mac","rating":4,"id":90241}]}

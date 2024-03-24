@@ -9,15 +9,12 @@ import org.json.JSONObject;
 
 
 import java.io.*;
-import java.util.Map;
 
 // Represents a writer that writes JSON representation of marketplace to file
 public class JsonWriter {
     private static final int TAB = 4;
     private PrintWriter writer;
     private String destination;
-
-    // Map<String,>
 
     // EFFECTS: constructs writer to write to destination file
     public JsonWriter(String destination) {
@@ -52,7 +49,7 @@ public class JsonWriter {
             mpProductJson.put("name", product.getProductName());
             mpProductJson.put("price", product.getProductPrice());
             mpProductJson.put("rating", product.getProductRating());
-            //mpProductJson.put("id", product.getProductId());
+            mpProductJson.put("id", product.getProductId());
             mpJsonArray.put(mpProductJson);
         }
 
@@ -68,7 +65,7 @@ public class JsonWriter {
             mpBuyerJson.put("name", product.getProductName());
             mpBuyerJson.put("price", product.getProductPrice());
             mpBuyerJson.put("rating", product.getProductRating());
-            //mpBuyerJson.put("id", product.getProductId());
+            mpBuyerJson.put("id", product.getProductId());
             byJsonArray.put(mpBuyerJson);
         }
 
@@ -103,5 +100,4 @@ public class JsonWriter {
     private void saveToFile(String json) {
         writer.print(json);
     }
-
 }

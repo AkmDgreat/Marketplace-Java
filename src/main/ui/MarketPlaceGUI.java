@@ -4,9 +4,15 @@ import model.Buyer;
 import model.MarketPlace;
 import model.Product;
 import model.Seller;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
 import javax.swing.*;
+import javax.swing.table.TableColumnModel;
+import javax.swing.table.TableModel;
 import java.awt.*;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class MarketPlaceGUI extends JFrame {
@@ -20,7 +26,7 @@ public class MarketPlaceGUI extends JFrame {
     private JPanel sellerPanel;
 
     //private final JButton eastButton = new JButton("East Button");
-    private final JButton exitButton = new JButton("Exit");
+    private final JButton loadButton = new JButton("Load");
     private final JButton saveButton = new JButton("Save");
 
     private final JButton listAProductButton = new JButton("List a product");
@@ -33,11 +39,17 @@ public class MarketPlaceGUI extends JFrame {
     private final JButton previousOrdersButton = new JButton("Previous orders");
     private final JButton rateProductsButton = new JButton("Rate product");
 
+    // saving functionality
+    private static final String JSON_STORE = "./data/marketPlace.json";
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
 
     MarketPlaceGUI() {
         seller = new Seller();
         marketPlace = new MarketPlace();
         buyer = new Buyer();
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
         setFrame();
         setLayout();
         //setBuyButton();
@@ -48,8 +60,9 @@ public class MarketPlaceGUI extends JFrame {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         //this.setBackground(Color.BLUE);
         this.setResizable(true);
-        this.setSize(500, 500);
+        //this.setSize(500, 500);
         //this.setBounds(, y, width, height);
+        this.setBounds(500, 150, 500, 500);
         this.pack();
         this.setVisible(true);
         this.setLayout(new BorderLayout());
@@ -62,9 +75,9 @@ public class MarketPlaceGUI extends JFrame {
 //        Box centerBox = Box.createVerticalBox();
 //        centerPanel.add(centerBox);
 
-        southPanel.add(exitButton);
+        southPanel.add(loadButton);
         southPanel.add(saveButton);
-        southPanel.setBorder(BorderFactory.createTitledBorder("Exit and save"));
+        southPanel.setBorder(BorderFactory.createTitledBorder("Load and Save"));
 
         //centerGridBagLayoutPanel.add(centerButton);
         centerPanel.setBorder(BorderFactory.createTitledBorder("Main screen"));
@@ -75,7 +88,7 @@ public class MarketPlaceGUI extends JFrame {
         buyerBox.add(previousOrdersButton);
         buyerBox.add(rateProductsButton);
         buyerPanel.add(buyerBox);
-        buyerPanel.setBorder(BorderFactory.createTitledBorder("Box Layout"));
+        buyerPanel.setBorder(BorderFactory.createTitledBorder("Buyer options"));
 
         Box sellerBox = Box.createVerticalBox();
         sellerPanel = new JPanel();
@@ -83,7 +96,7 @@ public class MarketPlaceGUI extends JFrame {
         sellerBox.add(viewListedProductButton);
         sellerBox.add(removeListingBtn);
         sellerPanel.add(sellerBox);
-        sellerPanel.setBorder(BorderFactory.createTitledBorder("East Box Layout"));
+        sellerPanel.setBorder(BorderFactory.createTitledBorder("Seller options"));
 
         setSellButton();
         setViewListingButton();
@@ -91,11 +104,25 @@ public class MarketPlaceGUI extends JFrame {
         setBuyButton();
         setViewOrderBtn();
         setRateOrderBtn();
+        setSaveBtn();
+        setLoadBtn();
 
         this.add(southPanel, BorderLayout.PAGE_END);
         this.add(centerPanel, BorderLayout.CENTER);
         this.add(buyerPanel, BorderLayout.LINE_START);
         this.add(sellerPanel, BorderLayout.LINE_END);
+    }
+
+    private void setLoadBtn() {
+        loadButton.addActionListener(e -> {
+            loadState();
+        });
+    }
+
+    private void setSaveBtn() {
+        saveButton.addActionListener(e -> {
+            saveState();
+        });
     }
 
     private void setSellButton() {
@@ -121,6 +148,42 @@ public class MarketPlaceGUI extends JFrame {
             buyProduct();
         });
     }
+
+    private void loadState() {
+        try {
+            this.marketPlace = jsonReader.readMp2();
+            this.seller = jsonReader.readSeller2();
+            this.buyer = jsonReader.readBuyer2();
+            System.out.println("Loaded marketPlace from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
+
+        this.centerPanel.removeAll();
+        this.centerPanel.repaint();
+
+        JLabel loadMessage = new JLabel("Successfully loaded!");
+        this.centerPanel.add(loadMessage);
+    }
+
+    private void saveState() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(marketPlace, seller, buyer);
+            jsonWriter.close();
+            System.out.println("Saved marketPlace to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+
+        this.centerPanel.removeAll();
+        this.centerPanel.repaint();
+
+        JLabel savedMessage = new JLabel("Successfully saved!");
+        this.centerPanel.add(savedMessage);
+    }
+
+
 
     private void setRateOrderBtn() {
         rateProductsButton.addActionListener(e -> {
@@ -176,12 +239,19 @@ public class MarketPlaceGUI extends JFrame {
     private void viewPreviousOrders() {
         this.centerPanel.removeAll();
         this.centerPanel.repaint();
+
+        JLabel columnLabel = new JLabel("ID " + "Name " + "Price " + "Rating " + "Buys ");
+        this.centerPanel.add(columnLabel);
+        this.centerPanel.revalidate();
+        this.centerPanel.validate();
+
         for (Product product: this.buyer.getBoughtProducts()) {
 //            JLabel nameLabel = new JLabel(product.getProductName());
 //            JLabel priceLabel = new JLabel(String.valueOf(product.getProductPrice()));
 //            JLabel idLabel = new JLabel(String.valueOf(product.getProductId()));
             String productString = product.getProductId() + " "
-                    + product.getProductName() + " " + product.getProductPrice();
+                    + product.getProductName() + " " + product.getProductPrice() + " "
+                    + product.getProductRating() + " " + product.getNumProductsSold();
             JLabel productLabel = new JLabel(productString);
             this.centerPanel.add(productLabel);
 //            this.centerPanel.add(idLabel);
@@ -245,7 +315,7 @@ public class MarketPlaceGUI extends JFrame {
 
         removeProductBtn.addActionListener(e -> {
             int productId = Integer.parseInt(idField.getText().trim());
-            ArrayList<Product> listCopy = this.marketPlace.getListOfProductsAvailable();
+            // ArrayList<Product> listCopy = this.marketPlace.getListOfProductsAvailable();
 
 //            for (Product product: this.marketPlace.getListOfProductsAvailable()) {
 //                if (product.getProductId() == productId) {
@@ -277,12 +347,44 @@ public class MarketPlaceGUI extends JFrame {
         this.centerPanel.removeAll();
         this.centerPanel.repaint();
 
+//        ArrayList<ArrayList<String>> data = new ArrayList<>();
+//        ArrayList<String> columNames = new ArrayList<>();
+//        columNames.add("ID");
+//        columNames.add("Name");
+//        columNames.add("Price");
+//        columNames.add("Rating");
+//        columNames.add("products sold");
+//        JTable table = new JTable((TableModel) data, (TableColumnModel) columNames);
+        //JLabel columnLabel = new JLabel("ID " + "Name " + "Price " + "Rating " + "ProductsSold");
+        JLabel columnLabel = new JLabel("ID " + "Name " + "Price " + "Rating " + "Buys ");
+        this.centerPanel.add(columnLabel);
+        this.centerPanel.revalidate();
+        this.centerPanel.validate();
+
         for (Product product: this.marketPlace.getListOfProductsAvailable()) {
             String productString = product.getProductId() + " "
-                    + product.getProductName() + " " + product.getProductPrice();
+                    + product.getProductName() + " " + product.getProductPrice() + " "
+                    + product.getProductRating() + " " + product.getNumProductsSold();
             JLabel productLabel = new JLabel(productString);
             this.centerPanel.add(productLabel);
         }
+
+//        for (int i = 0; i < this.marketPlace.getListOfProductsAvailable().size(); i++) {
+//            Product product = this.marketPlace.getListOfProductsAvailable().get(i);
+//
+//            String productId = String.valueOf(product.getProductId());
+//            String productName = product.getProductName();
+//            String productPrice = String.valueOf(product.getProductPrice());
+//            String productRating = String.valueOf(product.getProductRating());
+//            String numProdSold = String.valueOf(product.getNumProductsSold());
+//
+//            data.get(i).set(0, productId);
+//            data.get(i).set(1, productName);
+//            data.get(i).set(2, productPrice);
+//            data.get(i).set(3, productRating);
+//            data.get(i).set(4, numProdSold);
+//        }
+//        this.centerPanel.add(table);
         this.centerPanel.revalidate();
         this.centerPanel.validate();
     }

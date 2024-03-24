@@ -3,6 +3,8 @@ package model;
 import org.json.JSONObject;
 import persistence.Writable;
 
+import java.util.Random;
+
 // Represents a product having a product-ID, name, price, and rating
 public class Product implements Writable {
     private String productName;
@@ -10,7 +12,7 @@ public class Product implements Writable {
     private int productRating;
     private int numProductsSold;
     private int productId;
-    private static int counter = 0;
+    //private static int counter = 0;
 
 
     // EFFECTS: creates a product with given name, price, 0 rating,
@@ -18,16 +20,18 @@ public class Product implements Writable {
     public Product(String productName, int productPrice) {
         this.productName = productName;
         this.productPrice = productPrice;
+        this.numProductsSold = 0;
         this.productRating = 0;
-        incrementCounter();
-        this.productId = counter;
+        //incrementCounter();
+        int randomNum = new Random().nextInt(100000);
+        this.productId = randomNum;
     }
 
     // MODIFIES: this
     // EFFECTS: increments the counter by 1
-    public void incrementCounter() {
-        counter++;
-    }
+//    public void incrementCounter() {
+//        counter++;
+//    }
 
     // MODIFIES: this
     // EFFECTS: adds 1 to number of products sold
@@ -81,4 +85,8 @@ public class Product implements Writable {
     public void setId(int productId) {
         this.productId = productId;
     }
+
+//    public void setCounter(int value) {
+//        counter = value;
+//    }
 }

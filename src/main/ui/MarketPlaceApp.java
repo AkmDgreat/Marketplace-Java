@@ -100,6 +100,7 @@ public class MarketPlaceApp {
         }
     }
 
+
     // MODIFIES: this
     // EFFECTS: loads marketplace from file
     private void loadMarketPlace() {
@@ -107,7 +108,7 @@ public class MarketPlaceApp {
             this.marketPlace = jsonReader.readMp2();
             this.seller = jsonReader.readSeller2();
             this.buyer = jsonReader.readBuyer2();
-
+            //jsonReader.setProductId();
             System.out.println("Loaded marketPlace from " + JSON_STORE);
         } catch (IOException e) {
             System.out.println("Unable to read from file: " + JSON_STORE);
