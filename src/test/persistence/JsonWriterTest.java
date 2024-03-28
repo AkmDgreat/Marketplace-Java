@@ -15,10 +15,6 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class JsonWriterTest extends JsonTest {
-    //NOTE TO CPSC 210 STUDENTS: the strategy in designing tests for the JsonWriter is to
-    //write data to a file and then use the reader to read it back in and check that we
-    //read in a copy of what was written out.
-
     @Test
     void testWriterInvalidFile() {
         try {
@@ -44,7 +40,6 @@ class JsonWriterTest extends JsonTest {
 
             JsonReader reader = new JsonReader("./data/testWriterEmptyMarketplace.json");
             mp = reader.readMp2();
-            //assertEquals("My work room", wr.getName());
             assertEquals(0, mp.getListOfProductsAvailable().size());
             assertEquals(0, sl.getNumProductsListedByTheSeller());
             assertEquals(0, by.getBoughtProducts().size());

@@ -3,9 +3,11 @@ package ui;
 import javax.swing.*;
 import java.net.MalformedURLException;
 
+// represents a splash screen
 public class SplashScreenGUI {
     JWindow window = new JWindow();
 
+    // EFFECTS: creates a splashscreen
     public SplashScreenGUI() throws MalformedURLException {
         window.getContentPane().add(
                 new JLabel("",

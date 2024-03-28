@@ -15,6 +15,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
+// represents the marketplaceGUI
 public class MarketPlaceGUI extends JFrame {
     private MarketPlace marketPlace;
     private Buyer buyer;
@@ -28,6 +29,7 @@ public class MarketPlaceGUI extends JFrame {
     //private final JButton eastButton = new JButton("East Button");
     private final JButton loadButton = new JButton("Load");
     private final JButton saveButton = new JButton("Save");
+    //private SaveBtn saveButton; // !!!
 
     private final JButton listAProductButton = new JButton("List a product");
     //listAProductButton.setActionCommand()
@@ -41,20 +43,26 @@ public class MarketPlaceGUI extends JFrame {
 
     // saving functionality
     private static final String JSON_STORE = "./data/marketPlace.json";
-    private JsonWriter jsonWriter;
+    private JsonWriter jsonWriter; //!!!
     private JsonReader jsonReader;
 
+    // EFFECTS: creates the marketplace GUI
     MarketPlaceGUI() {
         seller = new Seller();
         marketPlace = new MarketPlace();
         buyer = new Buyer();
-        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonWriter = new JsonWriter(JSON_STORE); //!!!
         jsonReader = new JsonReader(JSON_STORE);
+
+
+        //saveButton = new SaveBtn(this.marketPlace, this.seller, this.buyer); //!!!
         setFrame();
         setLayout();
         //setBuyButton();
     }
 
+    // MODIFIES: this
+    // EFFECTS: sets the JFRAME
     private void setFrame() {
         this.setTitle("MarketPlace");
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -68,6 +76,8 @@ public class MarketPlaceGUI extends JFrame {
         this.setLayout(new BorderLayout());
     }
 
+    // MODIFIES: this
+    // EFFECTS: adds the components to the frame
     @SuppressWarnings("methodlength")
     private void setLayout() {
         southPanel = new JPanel(new FlowLayout());
@@ -78,6 +88,9 @@ public class MarketPlaceGUI extends JFrame {
 
         southPanel.add(loadButton);
         southPanel.add(saveButton);
+        southPanel.add(saveButton); //!!!
+
+
         southPanel.setBorder(BorderFactory.createTitledBorder("Load and Save"));
 
         //centerGridBagLayoutPanel.add(centerButton);
@@ -105,7 +118,7 @@ public class MarketPlaceGUI extends JFrame {
         setBuyButton();
         setViewOrderBtn();
         setRateOrderBtn();
-        setSaveBtn();
+        setSaveBtn(); //!!!
         setLoadBtn();
 
         this.add(southPanel, BorderLayout.PAGE_END);
@@ -114,42 +127,56 @@ public class MarketPlaceGUI extends JFrame {
         this.add(sellerPanel, BorderLayout.LINE_END);
     }
 
+    // MODIFIES: this
+    // EFFECTS: adds the action listener to loadButton
     private void setLoadBtn() {
         loadButton.addActionListener(e -> {
             loadState();
         });
     }
 
+    // MODIFIES: this
+    // EFFECTS: adds the action listener to saveButton
     private void setSaveBtn() {
         saveButton.addActionListener(e -> {
             saveState();
         });
     }
 
+    // MODIFIES: this
+    // EFFECTS: adds the action listener to sellButton
     private void setSellButton() {
         listAProductButton.addActionListener(e -> {
             sellProduct();
         });
     }
 
+    // MODIFIES: this
+    // EFFECTS: adds the action listener to viewListedProductButton
     private void setViewListingButton() {
         viewListedProductButton.addActionListener(e -> {
             viewListedProducts();
         });
     }
 
+    // MODIFIES: this
+    // EFFECTS: adds the action listener to removeListingBtn
     private void setRemoveListingButton() {
         removeListingBtn.addActionListener(e -> {
             removeAListedProduct();
         });
     }
 
+    // MODIFIES: this
+    // EFFECTS: adds the action listener to buyButton
     private void setBuyButton() {
         buyProductButton.addActionListener(e -> {
             buyProduct();
         });
     }
 
+    // MODIFIES: this
+    // EFFECTS: loads the marketplace from the jsonFile
     private void loadState() {
         try {
             this.marketPlace = jsonReader.readMp2();
@@ -167,7 +194,10 @@ public class MarketPlaceGUI extends JFrame {
         this.centerPanel.add(loadMessage);
     }
 
+    // MODIFIES: this
+    // EFFECTS: saves the marketplace to the jsonFile
     private void saveState() {
+        // !!!
         try {
             jsonWriter.open();
             jsonWriter.write(marketPlace, seller, buyer);
@@ -177,6 +207,7 @@ public class MarketPlaceGUI extends JFrame {
             System.out.println("Unable to write to file: " + JSON_STORE);
         }
 
+        //saveButton.saveState(this.marketPlace, this.seller, this.buyer);
         this.centerPanel.removeAll();
         this.centerPanel.repaint();
 
@@ -185,13 +216,16 @@ public class MarketPlaceGUI extends JFrame {
     }
 
 
-
+    // MODIFIES: this
+    // EFFECTS: adds the action listener to rateButton
     private void setRateOrderBtn() {
         rateProductsButton.addActionListener(e -> {
             rateOrder();
         });
     }
 
+    // MODIFIES: this
+    // EFFECTS: adds the rating to a product
     @SuppressWarnings("methodlength")
     private void rateOrder() {
         this.centerPanel.removeAll();
@@ -232,12 +266,16 @@ public class MarketPlaceGUI extends JFrame {
         });
     }
 
+    // MODIFIES: this
+    // EFFECTS: adds the action listener to viewPreviousOrdersBtn
     private void setViewOrderBtn() {
         previousOrdersButton.addActionListener(e -> {
             viewPreviousOrders();
         });
     }
 
+    // MODIFIES: this
+    // EFFECTS: displays the previous orders of the buyer
     private void viewPreviousOrders() {
         this.centerPanel.removeAll();
         this.centerPanel.repaint();
@@ -264,6 +302,8 @@ public class MarketPlaceGUI extends JFrame {
         this.centerPanel.validate();
     }
 
+    // MODIFIES: this
+    // EFFECTS: adds the product to buyer items
     @SuppressWarnings("methodlength")
     private void buyProduct() {
         viewListedProducts();
@@ -275,13 +315,13 @@ public class MarketPlaceGUI extends JFrame {
 
         JTextField idField = new JTextField();
         idField.setColumns(5);
-        JButton removeProductBtn = new JButton("Buy");
+        JButton buyProductBtn = new JButton("Buy");
         this.centerPanel.add(idField);
-        this.centerPanel.add(removeProductBtn);
+        this.centerPanel.add(buyProductBtn);
         this.centerPanel.revalidate();
         this.centerPanel.validate();
 
-        removeProductBtn.addActionListener(e -> {
+        buyProductBtn.addActionListener(e -> {
             int productId = Integer.parseInt(idField.getText().trim());
             ArrayList<Product> listCopy = this.marketPlace.getListOfProductsAvailable();
 
@@ -297,6 +337,8 @@ public class MarketPlaceGUI extends JFrame {
         });
     }
 
+    // MODIFIES: this
+    // EFFECTS: removes an order from the mp
     @SuppressWarnings("methodlength")
     private void removeAListedProduct() {
         this.centerPanel.removeAll();
@@ -346,6 +388,8 @@ public class MarketPlaceGUI extends JFrame {
         });
     }
 
+    // MODIFIES: this
+    // EFFECTS: displays the orders in the mp
     private void viewListedProducts() {
         this.centerPanel.removeAll();
         this.centerPanel.repaint();
@@ -392,6 +436,8 @@ public class MarketPlaceGUI extends JFrame {
         this.centerPanel.validate();
     }
 
+    // MODIFIES: this
+    // EFFECTS: adds a product to the mp
     @SuppressWarnings("methodlength")
     private void sellProduct() {
         this.centerPanel.removeAll();
