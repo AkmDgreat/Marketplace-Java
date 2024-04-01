@@ -1,14 +1,17 @@
 package ui;
 
+import model.Event;
+import model.EventLog;
+
 import javax.swing.*;
-import java.net.MalformedURLException;
 
 // represents a splash screen
 public class SplashScreenGUI {
     JWindow window = new JWindow();
 
     // EFFECTS: creates a splashscreen
-    public SplashScreenGUI() throws MalformedURLException {
+    public SplashScreenGUI() {
+        EventLog.getInstance().logEvent(new Event("displaying the splash screen"));
         window.getContentPane().add(
                 new JLabel("",
                         new ImageIcon("data/marketplace.png"),
@@ -23,5 +26,4 @@ public class SplashScreenGUI {
         window.setVisible(false);
         window.dispose();
     }
-
 }

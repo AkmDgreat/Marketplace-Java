@@ -20,10 +20,13 @@ public class Buyer implements Writable {
     public void buyProduct(Product product) {
         orderList.add(product);
         product.incrementNumProductSold();
+        EventLog.getInstance().logEvent(new Event(product.getProductName() +  " was bought"));
     }
 
     // EFFECTS: returns the orderList
     public ArrayList<Product> getBoughtProducts() {
+        EventLog.getInstance().logEvent(new Event("showing buyer products"));
+
         return this.orderList;
     }
 

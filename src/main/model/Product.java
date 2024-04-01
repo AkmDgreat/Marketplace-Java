@@ -37,6 +37,7 @@ public class Product implements Writable {
     // EFFECTS: adds 1 to number of products sold
     public void incrementNumProductSold() {
         this.numProductsSold++;
+
     }
 
     // REQUIRES: 1 <= productRating <= 5
@@ -44,6 +45,8 @@ public class Product implements Writable {
     // EFFECTS: sets the product rating
     public void setProductRating(int productRating) {
         this.productRating = productRating;
+        EventLog.getInstance().logEvent(new Event(this.getProductName() + " was rated"));
+
     }
 
     @Override

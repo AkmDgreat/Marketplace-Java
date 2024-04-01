@@ -1,9 +1,7 @@
 package ui;
 
-import model.Buyer;
-import model.MarketPlace;
-import model.Product;
-import model.Seller;
+import model.*;
+import model.Event;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
@@ -11,12 +9,15 @@ import javax.swing.*;
 import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
 import java.awt.*;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 // represents the marketplaceGUI
-public class MarketPlaceGUI extends JFrame {
+public class MarketPlaceGUI extends JFrame implements WindowListener {
     private MarketPlace marketPlace;
     private Buyer buyer;
     private Seller seller;
@@ -48,12 +49,12 @@ public class MarketPlaceGUI extends JFrame {
 
     // EFFECTS: creates the marketplace GUI
     MarketPlaceGUI() {
+        addWindowListener(this);
         seller = new Seller();
         marketPlace = new MarketPlace();
         buyer = new Buyer();
         jsonWriter = new JsonWriter(JSON_STORE); //!!!
         jsonReader = new JsonReader(JSON_STORE);
-
 
         //saveButton = new SaveBtn(this.marketPlace, this.seller, this.buyer); //!!!
         setFrame();
@@ -464,10 +465,47 @@ public class MarketPlaceGUI extends JFrame {
             Product product = new Product(nameField.getText(), Integer.parseInt(priceField.getText().trim()));
             this.seller.addProductToSellerList(product);
             this.marketPlace.addProductToMP(product);
-            System.out.println("The product was added");
 
             this.centerPanel.removeAll();
             this.centerPanel.repaint();
         });
+    }
+
+    @Override
+    public void windowOpened(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowClosing(WindowEvent e) {
+        for (Iterator<Event> it = EventLog.getInstance().iterator(); it.hasNext(); ) {
+            Event event = it.next();
+            System.out.println(event.getDescription());
+        }
+    }
+
+    @Override
+    public void windowClosed(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowIconified(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowDeiconified(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowActivated(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowDeactivated(WindowEvent e) {
+
     }
 }
