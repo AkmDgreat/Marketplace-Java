@@ -51,7 +51,7 @@ their price, and number of buys
 - You can save the state of my application by clicking the `save` button at the bottom
 - You can reload the state of my application by pressing the `load` button at the button
 
-## Phase 4: Task 2
+## Events
 
 - When a product is added to the marketplace, the event `{productName} was added to the marketplace`
   is logged
@@ -63,7 +63,7 @@ their price, and number of buys
 - When the buyer views the bought products (for example, to view the past orders, or to rate 
   the product), the event `showing buyer products` is logged
 
-## Phase 4: Task 3
+## Future plan
 
 If I had more time, I would improve the cohesion in my `MarketPlaceGUI` class. Right now, all of my buttons are defined
 in this same class. I would like to create an abstract class called `Button`, and all of my buttons, like `Buy` button, 
