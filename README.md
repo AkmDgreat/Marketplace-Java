@@ -41,7 +41,7 @@ their price, and number of buys
  the marketplace to file (if I so choose)
 - As a user, I want to be able to load the marketplace from file (If I so choose)
 
-## Instructions for Grader
+## How to use the application?
 
 - You can add product to the marketplace by clicking the button labelled `List a product`
 - You can remove a product by clicking the button labelled `remove a listing`
